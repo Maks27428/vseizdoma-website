@@ -17,6 +17,15 @@
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
+            transition: background 0.3s;
+        }
+
+        body.light-theme {
+            background: #f0f4f8;
+        }
+
+        body.light-theme::before {
+            opacity: 0.5;
         }
 
         /* Animated gradient background */
@@ -27,10 +36,17 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%);
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 25%, #06b6d4 50%, #10b981 75%, #1e3a8a 100%);
             background-size: 400% 400%;
             animation: gradientShift 15s ease infinite;
-            z-index: -2;
+            opacity: 0.7;
+            z-index: -1;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         /* Floating particles */
@@ -51,17 +67,89 @@
             animation: float 20s infinite;
         }
 
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
         @keyframes float {
             0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0; }
             10% { opacity: 0.5; }
             90% { opacity: 0.5; }
             100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Top control panel */
+        .control-panel {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .control-btn {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.3);
+            padding: 12px 20px;
+            border-radius: 50px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9em;
+        }
+
+        .control-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.05);
+        }
+
+        .language-selector {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.3);
+            padding: 8px 15px;
+            border-radius: 50px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .language-selector option {
+            background: #1e3a8a;
+            color: white;
+        }
+
+        /* Scroll to top button */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            cursor: pointer;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s;
+            z-index: 999;
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.5);
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px) scale(1.1);
         }
 
         .container {
@@ -72,10 +160,9 @@
             z-index: 1;
         }
 
-        /* Header with glassmorphism */
         header {
             text-align: center;
-            padding: 60px 20px 40px;
+            padding: 80px 20px 40px;
             animation: fadeInDown 1s ease;
         }
 
@@ -88,12 +175,20 @@
             letter-spacing: -2px;
         }
 
+        body.light-theme h1 {
+            color: #1e3a8a;
+        }
+
         .subtitle {
             color: rgba(255,255,255,0.95);
             font-size: 1.5em;
             font-weight: 300;
             margin-bottom: 20px;
             text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        body.light-theme .subtitle {
+            color: #475569;
         }
 
         /* Premium contact card */
@@ -103,13 +198,18 @@
             border-radius: 30px;
             padding: 40px;
             margin: 40px auto;
-            max-width: 700px;
+            max-width: 900px;
             text-align: center;
             border: 2px solid rgba(255,255,255,0.2);
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             animation: fadeInUp 1s ease;
             position: relative;
             overflow: hidden;
+        }
+
+        body.light-theme .main-contact {
+            background: rgba(255,255,255,0.9);
+            border-color: rgba(59, 130, 246, 0.3);
         }
 
         .main-contact::before {
@@ -138,6 +238,10 @@
             z-index: 1;
         }
 
+        body.light-theme .contact-name {
+            color: #1e3a8a;
+        }
+
         .contact-buttons {
             display: flex;
             gap: 15px;
@@ -152,12 +256,12 @@
             align-items: center;
             gap: 10px;
             background: white;
-            color: #667eea;
-            padding: 20px 45px;
+            color: #3b82f6;
+            padding: 18px 40px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 700;
-            font-size: 1.4em;
+            font-size: 1.3em;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: 0 10px 40px rgba(0,0,0,0.3);
         }
@@ -165,7 +269,7 @@
         .contact-button:hover {
             transform: translateY(-5px) scale(1.05);
             box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
             color: white;
         }
 
@@ -187,6 +291,15 @@
             background: #006699;
         }
 
+        .contact-button.instagram {
+            background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+            color: white;
+        }
+
+        .contact-button.instagram:hover {
+            background: linear-gradient(45deg, #bc1888 0%,#cc2366 25%,#dc2743 50%,#e6683c 75%,#f09433 100%);
+        }
+
         /* Premium features */
         .features {
             display: grid;
@@ -206,6 +319,11 @@
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
+        }
+
+        body.light-theme .feature-card {
+            background: rgba(255,255,255,0.95);
+            border-color: rgba(59, 130, 246, 0.3);
         }
 
         .feature-card::before {
@@ -243,10 +361,18 @@
             font-weight: bold;
         }
 
+        body.light-theme .feature-title {
+            color: #1e3a8a;
+        }
+
         .feature-description {
             color: rgba(255,255,255,0.9);
             line-height: 1.8;
             font-size: 1.15em;
+        }
+
+        body.light-theme .feature-description {
+            color: #475569;
         }
 
         /* Gallery section */
@@ -261,6 +387,11 @@
             font-weight: 900;
             margin-bottom: 50px;
             text-shadow: 0 5px 30px rgba(0,0,0,0.5);
+        }
+
+        body.light-theme .section-title {
+            color: #1e3a8a;
+            text-shadow: none;
         }
 
         .gallery-grid {
@@ -278,6 +409,11 @@
             box-shadow: 0 15px 40px rgba(0,0,0,0.3);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             animation: fadeInUp 0.6s ease;
+        }
+
+        body.light-theme .gallery-item {
+            background: white;
+            border-color: rgba(59, 130, 246, 0.3);
         }
 
         .gallery-item:hover {
@@ -310,21 +446,25 @@
             margin-bottom: 20px;
         }
 
+        body.light-theme .gallery-item-name {
+            color: #1e3a8a;
+        }
+
         .gallery-item-button {
             display: inline-block;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
             color: white;
             padding: 15px 40px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 700;
             transition: all 0.3s;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
         }
 
         .gallery-item-button:hover {
             transform: scale(1.1);
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.6);
         }
 
         /* Footer */
@@ -336,6 +476,12 @@
             border-top: 2px solid rgba(255,255,255,0.2);
             background: rgba(0,0,0,0.3);
             backdrop-filter: blur(10px);
+        }
+
+        body.light-theme footer {
+            color: #475569;
+            background: rgba(255,255,255,0.8);
+            border-top-color: rgba(59, 130, 246, 0.3);
         }
 
         footer p {
@@ -388,6 +534,16 @@
             .feature-card {
                 padding: 30px 20px;
             }
+
+            .control-panel {
+                top: 10px;
+                right: 10px;
+            }
+
+            .control-btn {
+                padding: 8px 15px;
+                font-size: 0.8em;
+            }
         }
     </style>
 </head>
@@ -403,14 +559,28 @@
         <div class="particle" style="width: 11px; height: 11px; left: 90%; animation-duration: 26s; animation-delay: 2s;"></div>
     </div>
 
+    <!-- Control Panel -->
+    <div class="control-panel">
+        <select class="language-selector" id="langSelector">
+            <option value="ru">🇷🇺 RU</option>
+            <option value="uz">🇺🇿 UZ</option>
+            <option value="en">🇬🇧 EN</option>
+        </select>
+        <button class="control-btn" id="themeToggle">🌙 Тема</button>
+        <button class="control-btn" id="musicToggle">🎵 Музыка</button>
+    </div>
+
+    <!-- Scroll to top button -->
+    <div class="scroll-top" id="scrollTop">⬆️</div>
+
     <div class="container">
         <header>
-            <h1>💰 Куплю всё из дома</h1>
-            <p class="subtitle">Быстрая и выгодная скупка бытовой техники в Ташкенте</p>
+            <h1 id="mainTitle">💰 Куплю всё из дома</h1>
+            <p class="subtitle" id="subtitle">Быстрая и выгодная скупка бытовой техники в Ташкенте</p>
         </header>
 
         <div class="main-contact">
-            <div class="contact-name">Руслан</div>
+            <div class="contact-name" id="contactName">Руслан</div>
             <div class="contact-buttons">
                 <a href="tel:+998991112323" class="contact-button">
                     📞 +998 99 111 23 23
@@ -421,37 +591,40 @@
                 <a href="https://t.me/+998991112323" class="contact-button telegram" target="_blank">
                     ✈️ Telegram
                 </a>
+                <a href="https://instagram.com/vseizdoma.uz" class="contact-button instagram" target="_blank">
+                    📸 Instagram
+                </a>
             </div>
         </div>
 
         <div class="features">
             <div class="feature-card">
                 <div class="feature-icon">⚡</div>
-                <div class="feature-title">Быстро</div>
-                <div class="feature-description">Приезжаем в течение часа после вашего звонка в любой район города</div>
+                <div class="feature-title" id="fastTitle">Быстро</div>
+                <div class="feature-description" id="fastDesc">Приезжаем в течение часа после вашего звонка в любой район города</div>
             </div>
             
             <div class="feature-card">
                 <div class="feature-icon">💵</div>
-                <div class="feature-title">Выгодно</div>
-                <div class="feature-description">Честная оценка и лучшие цены на рынке. Платим больше конкурентов!</div>
+                <div class="feature-title" id="profitTitle">Выгодно</div>
+                <div class="feature-description" id="profitDesc">Честная оценка и лучшие цены на рынке. Платим больше конкурентов!</div>
             </div>
             
             <div class="feature-card">
                 <div class="feature-icon">🚚</div>
-                <div class="feature-title">Удобно</div>
-                <div class="feature-description">Бесплатный самовывоз и оплата наличными на месте сразу</div>
+                <div class="feature-title" id="easyTitle">Удобно</div>
+                <div class="feature-description" id="easyDesc">Бесплатный самовывоз и оплата наличными на месте сразу</div>
             </div>
         </div>
 
         <div class="gallery-section">
-            <h2 class="section-title">Что мы покупаем</h2>
+            <h2 class="section-title" id="galleryTitle">Что мы покупаем</h2>
             <div class="gallery-grid">
                 <div class="gallery-item" style="animation-delay: 0.1s">
                     <img src="https://vseizdoma.uz/image1.jpg" alt="Бытовая техника">
                     <div class="gallery-item-info">
                         <div class="gallery-item-name">Руслан</div>
-                        <a href="tel:+998991112323" class="gallery-item-button">Позвонить</a>
+                        <a href="tel:+998991112323" class="gallery-item-button" id="callBtn1">Позвонить</a>
                     </div>
                 </div>
 
@@ -459,7 +632,7 @@
                     <img src="https://vseizdoma.uz/image2.jpg" alt="Бытовая техника">
                     <div class="gallery-item-info">
                         <div class="gallery-item-name">Руслан</div>
-                        <a href="tel:+998991112323" class="gallery-item-button">Позвонить</a>
+                        <a href="tel:+998991112323" class="gallery-item-button" id="callBtn2">Позвонить</a>
                     </div>
                 </div>
 
@@ -467,7 +640,7 @@
                     <img src="https://vseizdoma.uz/image3.jpg" alt="Бытовая техника">
                     <div class="gallery-item-info">
                         <div class="gallery-item-name">Руслан</div>
-                        <a href="tel:+998991112323" class="gallery-item-button">Позвонить</a>
+                        <a href="tel:+998991112323" class="gallery-item-button" id="callBtn3">Позвонить</a>
                     </div>
                 </div>
 
@@ -475,7 +648,7 @@
                     <img src="https://vseizdoma.uz/image4.jpg" alt="Бытовая техника">
                     <div class="gallery-item-info">
                         <div class="gallery-item-name">Руслан</div>
-                        <a href="tel:+998991112323" class="gallery-item-button">Позвонить</a>
+                        <a href="tel:+998991112323" class="gallery-item-button" id="callBtn4">Позвонить</a>
                     </div>
                 </div>
 
@@ -483,7 +656,7 @@
                     <img src="https://vseizdoma.uz/image5.jpg" alt="Бытовая техника">
                     <div class="gallery-item-info">
                         <div class="gallery-item-name">Руслан</div>
-                        <a href="tel:+998991112323" class="gallery-item-button">Позвонить</a>
+                        <a href="tel:+998991112323" class="gallery-item-button" id="callBtn5">Позвонить</a>
                     </div>
                 </div>
 
@@ -491,7 +664,7 @@
                     <img src="https://vseizdoma.uz/image6.jpg" alt="Бытовая техника">
                     <div class="gallery-item-info">
                         <div class="gallery-item-name">Руслан</div>
-                        <a href="tel:+998991112323" class="gallery-item-button">Позвонить</a>
+                        <a href="tel:+998991112323" class="gallery-item-button" id="callBtn6">Позвонить</a>
                     </div>
                 </div>
 
@@ -499,7 +672,7 @@
                     <img src="https://vseizdoma.uz/image7.jpg" alt="Бытовая техника">
                     <div class="gallery-item-info">
                         <div class="gallery-item-name">Руслан</div>
-                        <a href="tel:+998991112323" class="gallery-item-button">Позвонить</a>
+                        <a href="tel:+998991112323" class="gallery-item-button" id="callBtn7">Позвонить</a>
                     </div>
                 </div>
 
@@ -507,7 +680,7 @@
                     <img src="https://vseizdoma.uz/image8.jpg" alt="Бытовая техника">
                     <div class="gallery-item-info">
                         <div class="gallery-item-name">Руслан</div>
-                        <a href="tel:+998991112323" class="gallery-item-button">Позвонить</a>
+                        <a href="tel:+998991112323" class="gallery-item-button" id="callBtn8">Позвонить</a>
                     </div>
                 </div>
 
@@ -515,7 +688,7 @@
                     <img src="https://vseizdoma.uz/image9.jpg" alt="Бытовая техника">
                     <div class="gallery-item-info">
                         <div class="gallery-item-name">Руслан</div>
-                        <a href="tel:+998991112323" class="gallery-item-button">Позвонить</a>
+                        <a href="tel:+998991112323" class="gallery-item-button" id="callBtn9">Позвонить</a>
                     </div>
                 </div>
 
@@ -523,18 +696,50 @@
                     <img src="https://vseizdoma.uz/image10.jpg" alt="Бытовая техника">
                     <div class="gallery-item-info">
                         <div class="gallery-item-name">Руслан</div>
-                        <a href="tel:+998991112323" class="gallery-item-button">Позвонить</a>
+                        <a href="tel:+998991112323" class="gallery-item-button" id="callBtn10">Позвонить</a>
                     </div>
                 </div>
             </div>
         </div>
 
         <footer>
-            <p style="font-size: 1.4em; font-weight: bold;">📍 Ташкент, Узбекистан</p>
-            <p style="font-size: 1.2em;">⏰ Работаем ежедневно с 9:00 до 21:00</p>
+            <p style="font-size: 1.4em; font-weight: bold;" id="location">📍 Ташкент, Узбекистан</p>
+            <p style="font-size: 1.2em;" id="schedule">⏰ Работаем ежедневно с 9:00 до 21:00</p>
             <p style="margin-top: 30px; opacity: 0.8;">© 2025 Vseizdoma.uz - Скупка бытовой техники</p>
-            <p style="opacity: 0.8;">Честно • Быстро • Выгодно</p>
+            <p style="opacity: 0.8;" id="slogan">Честно • Быстро • Выгодно</p>
         </footer>
     </div>
-</body>
-</html>
+
+    <script>
+        // Translations
+        const translations = {
+            ru: {
+                mainTitle: '💰 Куплю всё из дома',
+                subtitle: 'Быстрая и выгодная скупка бытовой техники в Ташкенте',
+                contactName: 'Руслан',
+                fastTitle: 'Быстро',
+                fastDesc: 'Приезжаем в течение часа после вашего звонка в любой район города',
+                profitTitle: 'Выгодно',
+                profitDesc: 'Честная оценка и лучшие цены на рынке. Платим больше конкурентов!',
+                easyTitle: 'Удобно',
+                easyDesc: 'Бесплатный самовывоз и оплата наличными на месте сразу',
+                galleryTitle: 'Что мы покупаем',
+                callBtn: 'Позвонить',
+                location: '📍 Ташкент, Узбекистан',
+                schedule: '⏰ Работаем ежедневно с 9:00 до 21:00',
+                slogan: 'Честно • Быстро • Выгодно'
+            },
+            uz: {
+                mainTitle: '💰 Uydan hamma narsani sotib olamiz',
+                subtitle: 'Toshkentda maishiy texnikani tez va foydali sotib olish',
+                contactName: 'Ruslan',
+                fastTitle: 'Tez',
+                fastDesc: "Qo'ng'iroqdan keyin bir soat ichida shaharning istalgan hududiga kelamiz",
+                profitTitle: 'Foydali',
+                profitDesc: 'Halol baholash va bozordagi eng yaxshi narxlar. Raqiblardan ko\'proq to\'laymiz!',
+                easyTitle: 'Qulay',
+                easyDesc: "Bepul yetkazib berish va joyida naqd to'lov",
+                galleryTitle: 'Biz nima sotib olamiz',
+                callBtn: "Qo'ng'iroq qilish",
+                location: '📍 Toshkent, O\'zbekiston',
+                schedule: '⏰ Har
