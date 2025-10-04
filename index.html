@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Куплю всё из дома - Vseizdoma.uz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #008080 0%, #005555 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            animation: fadeInDown 1s ease;
+        }
+
+        h1 {
+            color: white;
+            font-size: 3em;
+            margin-bottom: 15px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+        }
+
+        .subtitle {
+            color: rgba(255,255,255,0.95);
+            font-size: 1.4em;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .main-contact {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px auto;
+            max-width: 600px;
+            text-align: center;
+            border: 2px solid rgba(255,255,255,0.3);
+            animation: fadeInUp 1s ease;
+        }
+
+        .contact-name {
+            color: white;
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .contact-button {
+            display: inline-block;
+            background: white;
+            color: #008080;
+            padding: 18px 50px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.5em;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            margin: 10px;
+        }
+
+        .contact-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+            background: #f0f0f0;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .feature-icon {
+            font-size: 3.5em;
+            margin-bottom: 15px;
+        }
+
+        .feature-title {
+            font-size: 1.5em;
+            color: #008080;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .feature-description {
+            color: #555;
+            line-height: 1.6;
+            font-size: 1.1em;
+        }
+
+        .gallery-section {
+            margin: 50px 0;
+        }
+
+        .section-title {
+            color: white;
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .gallery-item {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-item-info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .gallery-item-name {
+            color: #008080;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .gallery-item-button {
+            display: inline-block;
+            background: #008080;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item-button:hover {
+            background: #006666;
+            transform: scale(1.05);
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            padding: 40px 20px;
+            margin-top: 60px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        footer p {
+            margin: 8px 0;
+            opacity: 0.9;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2em;
+            }
+            
+            .subtitle {
+                font-size: 1.1em;
+            }
+
+            .contact-button {
+                padding: 15px 35px;
+                font-size: 1.2em;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>💰 Куплю всё из дома</h1>
+            <p class="subtitle">Быстрая и выгодная скупка бытовой техники в Ташкенте</p>
+        </header>
+
+        <div class="main-contact">
+            <div class="contact-name">Руслан</div>
+            <a href="tel:+998991112323" class="contact-button">📞 +998 99 111 23 23</a>
+        </div>
+
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <div class="feature-title">Быстро</div>
+                <div class="feature-description">Приезжаем в течение часа после вашего звонка</div>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">💵</div>
+                <div class="feature-title">Выгодно</div>
+                <div class="feature-description">Честная оценка и лучшие цены на рынке</div>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🚚</div>
+                <div class="feature-title">Удобно</div>
+                <div class="feature-description">Самовывоз и оплата наличными на месте</div>
+            </div>
+        </div>
+
+        <div class="gallery-section">
+            <h2 class="section-title">Что мы покупаем</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item" style="animation-delay: 0.1s">
+                    <img src="https://vseizdoma.uz/image1.jpg" alt="Бытовая техника">
+                    <div class="gallery-item-info">
+                        <div class="gallery-item-name">Руслан</div>
+                        <a href="tel:+998991112323" class="gallery-item-button">Позвонить</a>
+                    </div>
+                </div>
+
+                <div class="gallery-item" style="animation-delay: 0.2s">
+                    <img src="https://vseizdoma.uz/image2.jpg" alt="Бытовая техника">
+                    <div class="gallery-item-info">
+                        <div class="gallery-item-name">Руслан</div>
+                        <a href="tel:+998991112323" class="gallery-item-button">Позвонить</a>
+                    </div>
+                </div>
+
+                <div class="gallery-item" style="animation-delay: 0.3s">
+                    <img src="https://vseizdoma.uz/image3.jpg" alt="Бытовая техника">
+                    <div class="gallery-item-info">
+                        <div class="gallery-item-name">Руслан</div>
+                        <a href="tel:+998991112323" class="gallery-item-button">Позвонить</a>
+                    </div>
+                </div>
+
+                <div class="gallery-item" style="animation-delay: 0.4s">
+                    <img src="https://vseizdoma.uz/image4.jpg" alt="Бытовая техника">
+                    <div class="gallery-item-info">
+                        <div class="gallery-item-name">Руслан</div>
+                        <a href="tel:+998991112323" class="gallery-item-button">Позвонить</a>
+                    </div>
+                </div>
+
+                <div class="gallery-item" style="animation-delay: 0.5s">
+                    <img src="https://vseizdoma.uz/image5.jpg" alt="Бытовая техника">
+                    <div class="gallery-item-info">
+                        <div class="gallery-item-name">Руслан</div>
+                        <a href="tel:+998991112323" class="gallery-item-button">Позвонить</a>
+                    </div>
+                </div>
+
+                <div class="gallery-item" style="animation-delay: 0.6s">
+                    <img src="https://vseizdoma.uz/image6.jpg" alt="Бытовая техника">
+                    <div class="gallery-item-info">
+                        <div class="gallery-item-name">Руслан</div>
+                        <a href="tel:+998991112323" class="gallery-item-button">Позвонить</a>
+                    </div>
+                </div>
+
+                <div class="gallery-item" style="animation-delay: 0.7s">
+                    <img src="https://vseizdoma.uz/image7.jpg" alt="Бытовая техника">
+                    <div class="gallery-item-info">
+                        <div class="gallery-item-name">Руслан</div>
+                        <a href="tel:+998991112323" class="gallery-item-button">Позвонить</a>
+                    </div>
+                </div>
+
+                <div class="gallery-item" style="animation-delay: 0.8s">
+                    <img src="https://vseizdoma.uz/image8.jpg" alt="Бытовая техника">
+                    <div class="gallery-item-info">
+                        <div class="gallery-item-name">Руслан</div>
+                        <a href="tel:+998991112323" class="gallery-item-button">Позвонить</a>
+                    </div>
+                </div>
+
+                <div class="gallery-item" style="animation-delay: 0.9s">
+                    <img src="https://vseizdoma.uz/image9.jpg" alt="Бытовая техника">
+                    <div class="gallery-item-info">
+                        <div class="gallery-item-name">Руслан</div>
+                        <a href="tel:+998991112323" class="gallery-item-button">Позвонить</a>
+                    </div>
+                </div>
+
+                <div class="gallery-item" style="animation-delay: 1s">
+                    <img src="https://vseizdoma.uz/image10.jpg" alt="Бытовая техника">
+                    <div class="gallery-item-info">
+                        <div class="gallery-item-name">Руслан</div>
+                        <a href="tel:+998991112323" class="gallery-item-button">Позвонить</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p style="font-size: 1.3em; font-weight: bold;">📍 Ташкент, Узбекистан</p>
+            <p style="font-size: 1.1em;">⏰ Работаем ежедневно с 9:00 до 21:00</p>
+            <p style="margin-top: 20px;">© 2025 Vseizdoma.uz - Скупка бытовой техники</p>
+            <p>Честно • Быстро • Выгодно</p>
+        </footer>
+    </div>
+</body>
+</html>
